@@ -1,10 +1,15 @@
 body {
   font-family: 'Roboto', sans-serif;
+  background-image: linear-gradient(#ff9a9e, #fecfec);
+  /* width: 400%; */
+  height: 60rem;
+  color: white;
 }
 
 .nav {
   width: 100%;
   text-align: center;
+  text-shadow: 1px 1px black;
 }
 
 #title {
