@@ -14,5 +14,21 @@
     <h2 id="title">time.io</h2>
     <span>track your time and all will be fine</span>
   </div>
+  <div id="timer-container">
+    <form onsubmit="startTimer()">
+      Activity: <input type="text" id="activity"/><br/>
+      Priority: 
+      <select id="priority">
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5r>5</option>
+      </select><br/>
+      <input type="submit" value="Track Time"/>
+    </form>
+  </div>
+  <script src="index.js"></script>
 </body>
+
 </html>
