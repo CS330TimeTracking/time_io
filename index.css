@@ -4,14 +4,18 @@ body {
   /* width: 400%; */
   height: 60rem;
   color: white;
+  text-shadow: 1px 1px black;
 }
 
 .nav {
   width: 100%;
   text-align: center;
-  text-shadow: 1px 1px black;
 }
 
 #title {
   margin: 0;
+}
+
+#timer-container {
+  width: 100%;
 }
