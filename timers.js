@@ -101,7 +101,8 @@ function togglePausePlay(activity) {
 
 function deleteActivity(activity) {
   var el = document.getElementById(activity);
-  clearInterval(activityData[activity]);
+  activities = activities.filter((el) => el != activity);
+  clearInterval(activityData[activity].intervalId);
   delete activityData[activity];
   localStorage.removeItem(activity);
 
