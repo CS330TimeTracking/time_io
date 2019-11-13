@@ -16,8 +16,21 @@ body {
   margin: 0;
 }
 
+.page-heading {
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 2%;
+}
+
 #timer-container {
   width: 100%;
+  text-align: center;
+}
+
+#priority {
+  width: 131px;
+  height: 19px;
 }
 
 #loginForm {
@@ -25,17 +38,21 @@ body {
     text-align: center;
 }
 
-.login {
-    width: 100%;
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 2%;
+.new-timer {
+  width: 100%;
+  text-align: center;
+  margin-top: 2%;
 }
 
-.loginButton {
+button {
+  background-color: #4287f5;
+  color: white;
+}
+
+.submit-button {
     border: none;
     color: white;
     text-align: center;
-    background-color: #4287f5;
     padding: 5px 10px;
+    background-color: #4287f5
 }
