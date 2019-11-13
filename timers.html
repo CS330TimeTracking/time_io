@@ -14,21 +14,26 @@
     <h2 id="title">time.io</h2>
     <span>track your time and all will be fine</span>
   </div>
+  <br/>
+  <br/>
+  <div class="page-heading">
+    Timers
+  </div>
   <div id="timer-container">
-    <form onsubmit="startTimer()">
-      Activity: <input type="text" id="activity"/><br/>
-      Priority:
+    <form action="#" onsubmit="startTimer()">
+      Activity:<br/><br/> <input type="text" id="activity"/><br/><br/>
+      Priority:<br/><br/>
       <select id="priority">
         <option value=1>1</option>
         <option value=2>2</option>
         <option value=3>3</option>
         <option value=4>4</option>
-        <option value=5r>5</option>
-      </select><br/>
-      <input type="submit" value="Track Time"/>
+        <option value=5>5</option>
+      </select><br/><br/>
+      <input type="submit" value="Track Time" class="submit-button"/>
     </form>
   </div>
-  <script src="index.js"></script>
+  <script src="timers.js"></script>
 </body>
 
 </html>
