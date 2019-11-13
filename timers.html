@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <title>Time.io</title>
+</head>
+
+<body>
+  <div class="nav">
+    <h2 id="title">time.io</h2>
+    <span>track your time and all will be fine</span>
+  </div>
+  <div id="timer-container">
+    <form onsubmit="startTimer()">
+      Activity: <input type="text" id="activity"/><br/>
+      Priority:
+      <select id="priority">
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5r>5</option>
+      </select><br/>
+      <input type="submit" value="Track Time"/>
+    </form>
+  </div>
+  <script src="index.js"></script>
+</body>
+
+</html>
