@@ -27,7 +27,18 @@ function startTimer() {
     'intervalId': null,
   };
 
-  timers.insertAdjacentHTML("afterend", `<div class="new-timer">${activity}: <span id="${activity}">00:00:00</span><br/><button id="${activity}-pp" onclick="togglePausePlay('${activity}')">Resume</button></div>`);
+  var newTimer = 
+    `<div class="new-timer" id="${activity}">
+      <button class="close-activity" onclick="deleteActivity('${activity}')">
+        X
+      </button>
+      ${activity}: <span id="${activity}-timer">00:00:00</span><br/>
+      <button id="${activity}-pp" onclick="togglePausePlay('${activity}')">
+        Resume
+      </button>
+    </div>`;
+
+  timers.insertAdjacentHTML("afterend", newTimer);
   togglePausePlay(activity); 
 }
 
@@ -40,9 +51,17 @@ function togglePausePlay(activity) {
     pp.innerHTML = 'Pause';
     activityData[activity].intervalId = setInterval(() => {
       activityData[activity].elapsedTime++;
-      document.getElementById(activity).innerHTML = `${timeFormat(activityData[activity].elapsedTime)}`
+      document.getElementById(`${activity}-timer`).innerHTML = `${timeFormat(activityData[activity].elapsedTime)}`
     }, 1000);
   } 
+}
+
+function deleteActivity(activity) {
+  var el = document.getElementById(activity);
+  clearInterval(activityData[activity].intervalId);
+  delete activityData[activity];
+
+  return el.parentNode.removeChild(el);
 }
 
 function timeFormat(s) {
