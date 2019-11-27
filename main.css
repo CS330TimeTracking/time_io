@@ -1,10 +1,9 @@
 body {
   font-family: 'Roboto', sans-serif;
-  background-image: linear-gradient(#ff9a9e, #fecfec);
-  /* width: 400%; */
-  height: 60rem;
+  background-image: linear-gradient(#f57dc7, #f1a3d3);
   color: white;
   text-shadow: 1px 1px black;
+  min-height: 60rem;
 }
 
 .nav {
@@ -71,4 +70,14 @@ a:hover{
 }
 a:active{
   color: white;
+}
+
+#calendar-wrapper {
+  width: 100%;
+  text-align: center;
+}
+
+#calendar {
+  margin: auto;
+  width: 75%;
 }
