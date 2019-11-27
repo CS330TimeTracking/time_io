@@ -18,6 +18,7 @@ body {
 .page-heading {
   width: 100%;
   text-align: center;
+  vertical-align: middle;
   font-size: 24px;
   margin-bottom: 2%;
 }
@@ -46,6 +47,7 @@ body {
 button {
   background-color: #4287f5;
   color: white;
+  border: none;
 }
 
 .submit-button {
