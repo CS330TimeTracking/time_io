@@ -1,5 +1,6 @@
 var activityData = {};
 var activities = [];
+var currentUser = sessionStorage.getItem("currentUsername");
 
 function init () {
   window.onbeforeunload = onClose;
@@ -10,34 +11,46 @@ function init () {
   activities.forEach((el) => {
     actData = JSON.parse(localStorage.getItem(el));
     activityData[el] = {
-      'priotity': actData.priority,
+      'priority': actData.priority,
       'elapsedTime': actData.elapsedTime,
       'startTime': actData.startTime,
       'intervalId': actData.intervalId,
+      'user': actData.user,
+      'name': actData.name,
     }
   });
 
   renderTimers();
 }
 
+function hash(value) {
+    var hash = 0;
+    for (var i = 0; i < value.length; ++i) {
+        hash = ((hash << 5) - hash) + value.charCodeAt(i) | 0;
+    }
+    return hash;
+};
+
 function startTimer() {
   var timers = document.getElementById("timer-container");
   var activity = document.getElementById("activity").value;
-  var priotity = document.getElementById("priority").value;
+  var priority = document.getElementById("priority").value;
+
+  var key = hash(activity + currentUser);
 
   if (!activity) {
     alert("Please name your activity");
     return;
   }
 
-  if (activityData[activity]) {
+  if (activityData[key]) {
     alert("Activity already exists, pick another name or remove other activity.")
     return;
   }
 
   var currTime = new Date();
-  activityData[activity] = {
-    'priotity': priotity,
+  activityData[key] = {
+    'priority': priority,
     'elapsedTime': 0,
     'startTime': {
       'hours': currTime.getHours,
@@ -45,11 +58,13 @@ function startTimer() {
       'seconds': currTime.getSeconds
     },
     'intervalId': null,
+    'user': currentUser,
+    'name': activity,
   };
 
-  activities.push(activity);
+  activities.push(key);
 
-  var newTimer = 
+  var newTimer =
     `<div class="new-timer" id="${activity}">
       <button class="close-activity" onclick="deleteActivity('${activity}')">
         X
@@ -67,44 +82,50 @@ function startTimer() {
 
 function renderTimers() {
   var timers = document.getElementById("timer-container");
-  activities.forEach((activity) => {
-    var newTimer = 
-    `<div class="new-timer" id="${activity}">
-      <button class="close-activity" onclick="deleteActivity('${activity}')">
-        X
-      </button>
-      <br/>
-      ${activity}: <span id="${activity}-timer">${timeFormat(activityData[activity].elapsedTime)}</span><br/>
-      <button id="${activity}-pp" onclick="togglePausePlay('${activity}')">
+  activities.forEach((activityHash) => {
+    var activity = activityData[activityHash];
+    if (activity.user != null && activity.user != currentUser) {
+        return;
+    }
+    var newTimer =
+    `
+    <div class="new-timer" id="${activity.name}">
+      ${activity.name}: <span id="${activity.name}-timer">${timeFormat(activity.elapsedTime)}</span><br/>
+      <button id="${activity.name}-pp" onclick="togglePausePlay('${activity.name}')">
         Resume
+      </button>
+      <button class="close-activity" onclick="deleteActivity('${activity.name}')">
+        X
       </button>
     </div>`;
 
     timers.insertAdjacentHTML("afterend", newTimer);
-    togglePausePlay(activity);
+    togglePausePlay(activity.name);
   });
 }
 
 function togglePausePlay(activity) {
+  var key = hash(activity + currentUser);
   var pp = document.getElementById(`${activity}-pp`);
   if (pp.innerHTML == 'Pause') {
-    clearInterval(activityData[activity].intervalId);
+    clearInterval(activityData[key].intervalId);
     pp.innerHTML = 'Resume';
   } else {
     pp.innerHTML = 'Pause';
-    activityData[activity].intervalId = setInterval(() => {
-      activityData[activity].elapsedTime++;
-      document.getElementById(`${activity}-timer`).innerHTML = `${timeFormat(activityData[activity].elapsedTime)}`
+    activityData[key].intervalId = setInterval(() => {
+      activityData[key].elapsedTime++;
+      document.getElementById(`${activity}-timer`).innerHTML = `${timeFormat(activityData[key].elapsedTime)}`
     }, 1000);
-  } 
+  }
 }
 
 function deleteActivity(activity) {
   var el = document.getElementById(activity);
+  var key = hash(activity + currentUser);
   activities = activities.filter((el) => el != activity);
-  clearInterval(activityData[activity].intervalId);
-  delete activityData[activity];
-  localStorage.removeItem(activity);
+  clearInterval(activityData[key].intervalId);
+  delete activityData[key];
+  localStorage.removeItem(key);
 
   return el.parentNode.removeChild(el);
 }
