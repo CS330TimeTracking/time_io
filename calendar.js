@@ -1,5 +1,7 @@
 var activities = [];
 var calEvents = [];
+var currentUser = sessionStorage.getItem("currentUsername");
+
 function init () {
   activities = JSON.parse(localStorage.getItem("activities"));
   activities = activities == null ? [] : activities;
@@ -20,9 +22,9 @@ function init () {
 function buildEvents() {
   activities.forEach((el) => {
     actData = JSON.parse(localStorage.getItem(el));
-    if (actData.paused) {
+    if (actData.paused && actData.user == currentUser) {
       var newEvent = {
-        title: el,
+        title: actData.name,
         start: `${actData.date}T${actData.startTime}`,
         end: `${actData.date}T${parseEndTime(actData.startTime, actData.elapsedTime)}`,
         allDay: false,

@@ -101,7 +101,7 @@ function renderTimers() {
 
     timers.insertAdjacentHTML("afterend", newTimer);
 
-    if (activityData[activity].paused) return;
+    if (activity.paused) return;
     togglePausePlay(activity.name);
   });
 }
@@ -113,9 +113,9 @@ function togglePausePlay(activity) {
   if (!activityData[key].paused) {
     clearInterval(activityData[key].intervalId);
     pp.innerHTML = 'Resume';
-    activityData[activity].paused = true;
+    activityData[key].paused = true;
   } else {
-    activityData[activity].paused = false;
+    activityData[key].paused = false;
     pp.innerHTML = 'Pause';
     activityData[key].intervalId = setInterval(() => {
       activityData[key].elapsedTime++;
