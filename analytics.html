@@ -30,6 +30,7 @@
     <div id="container" style="margin: auto; width: 80%; height: 100%"></div>
       <script>
         anychart.onDocumentReady(function() {
+          var currentUser = sessionStorage.getItem("currentUsername");
           var activityData = {};
           var activities = [];
 
@@ -43,20 +44,24 @@
               'elapsedTime': actData.elapsedTime,
               'startTime': actData.startTime,
               'intervalId': actData.intervalId,
+              'user': actData.user,
+              'name': actData.name,
             }
           });
 
           var data = []
           for (var el in activityData) {
-            var elapsed = activityData[el].elapsedTime
+            if (activityData[el].user != currentUser){
+              continue;
+            }
+            var elapsed = activityData[el].elapsedTime;
+            var name = activityData[el].name;
             var activity_dict = {
-              x: el,
+              x: name,
               value: elapsed,
             }
             data.push(activity_dict)
-            console.log(el)
           }
-          console.log(data)
 
           // create the chart
           var chart = anychart.pie();
