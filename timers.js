@@ -10,10 +10,12 @@ function init () {
   activities.forEach((el) => {
     actData = JSON.parse(localStorage.getItem(el));
     activityData[el] = {
-      'priotity': actData.priority,
+      'priority': actData.priority,
       'elapsedTime': actData.elapsedTime,
+      'date': actData.date,
       'startTime': actData.startTime,
       'intervalId': actData.intervalId,
+      'paused': actData.paused
     }
   });
 
@@ -37,14 +39,12 @@ function startTimer() {
 
   var currTime = new Date();
   activityData[activity] = {
-    'priotity': priotity,
+    'priotity': priority,
     'elapsedTime': 0,
-    'startTime': {
-      'hours': currTime.getHours,
-      'minutes': currTime.getMinutes,
-      'seconds': currTime.getSeconds
-    },
+    'date': `${currTime.getFullYear()+'-'+(currTime.getMonth()+1)+'-'+currTime.getDate()}`,
+    'startTime': `${currTime.getHours()}:${currTime.getMinutes() < 10 ? '0' + currTime.getMinutes() : currTime.getMinutes()}`,
     'intervalId': null,
+    'paused': true
   };
 
   activities.push(activity);
@@ -81,16 +81,19 @@ function renderTimers() {
     </div>`;
 
     timers.insertAdjacentHTML("afterend", newTimer);
+    if (activityData[activity].paused) return;
     togglePausePlay(activity);
   });
 }
 
 function togglePausePlay(activity) {
   var pp = document.getElementById(`${activity}-pp`);
-  if (pp.innerHTML == 'Pause') {
+  if (!activityData[activity].paused) {
     clearInterval(activityData[activity].intervalId);
     pp.innerHTML = 'Resume';
+    activityData[activity].paused = true;
   } else {
+    activityData[activity].paused = false;
     pp.innerHTML = 'Pause';
     activityData[activity].intervalId = setInterval(() => {
       activityData[activity].elapsedTime++;
