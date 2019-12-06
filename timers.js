@@ -72,7 +72,7 @@ function startTimer() {
       <br/>
       ${activity}: <span id="${activity}-timer">00:00:00</span><br/>
       <button id="${activity}-pp" onclick="togglePausePlay('${activity}')">
-        Resume
+        Resume Timer
       </button>
     </div>`;
 
@@ -92,7 +92,7 @@ function renderTimers() {
     <div class="new-timer" id="${activity.name}">
       ${activity.name}: <span id="${activity.name}-timer">${timeFormat(activity.elapsedTime)}</span><br/>
       <button id="${activity.name}-pp" onclick="togglePausePlay('${activity.name}')">
-        Resume
+        Resume Timer
       </button>
       <button class="close-activity" onclick="deleteActivity('${activity.name}')">
         X
@@ -112,11 +112,11 @@ function togglePausePlay(activity) {
 
   if (!activityData[key].paused) {
     clearInterval(activityData[key].intervalId);
-    pp.innerHTML = 'Resume';
+    pp.innerHTML = 'Resume Timer';
     activityData[key].paused = true;
   } else {
     activityData[key].paused = false;
-    pp.innerHTML = 'Pause';
+    pp.innerHTML = 'Pause Timer';
     activityData[key].intervalId = setInterval(() => {
       activityData[key].elapsedTime++;
       document.getElementById(`${activity}-timer`).innerHTML = `${timeFormat(activityData[key].elapsedTime)}`
