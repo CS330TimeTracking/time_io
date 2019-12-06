@@ -1,8 +1,8 @@
 body {
   font-family: 'Roboto', sans-serif;
-  background-image: linear-gradient(#f57dc7, #f1a3d3);
+  background-color: #0a66fa;
   color: white;
-  text-shadow: 1px 1px black;
+  text-shadow: 1px 1px white;
   min-height: 60rem;
 }
 
@@ -45,33 +45,33 @@ body {
 }
 
 button {
-  background-color: #4287f5;
-  color: white;
+  background-color: white;
+  color: #0a66fa;
   border: none;
 }
 
 .submit-button {
     border: none;
-    color: white;
+    color: #0a66fa;
     text-align: center;
     padding: 5px 10px;
-    background-color: #4287f5
+    background-color: white
 }
 
 a:link{
   text-decoration: none;
-  color: white;
+  color: #0a66fa;
 
 }
 
 a:visited{
-  color: white;
+  color: #0a66fa;
 }
 a:hover{
-  color: white;
+  color: #0a66fa;
 }
 a:active{
-  color: white;
+  color: #0a66fa;
 }
 
 #calendar-wrapper {
