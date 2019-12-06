@@ -82,6 +82,10 @@ button {
   border: none;
 }
 
+.close-activity {
+  float: right;
+}
+
 .submit-button {
     border: none;
     background-color: #0a66fa;
