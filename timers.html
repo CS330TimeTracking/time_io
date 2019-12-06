@@ -19,16 +19,16 @@
   <div>
     <table class="page-heading">
       <tr>
-        <td><h4><a href="timers.html">Timers</a></h4></td>
-        <td><h5><a href="calendar.html">Calendar</a></h5></td>
-        <td><h5><a href="analytics.html">Analytics</a></h5></td>
+        <td><h4><a href="timers.html"><u>Timers</u></a></h4></td>
+        <td><h4><a href="calendar.html">Calendar</a></h4></td>
+        <td><h4><a href="analytics.html">Analytics</a></h4></td>
       </tr>
     </table>
   </div>
   <div id="timer-container">
     <form action="#" onsubmit="startTimer()">
-      Activity:<br/><br/> <input type="text" id="activity"/><br/><br/>
-      Priority:<br/><br/>
+      Name Your Activity:<br/><br/> <input type="text" id="activity"/><br/><br/>
+      Assign A Priority (1 the most, 5 the least):<br/><br/>
       <select id="priority">
         <option value=1>1</option>
         <option value=2>2</option>
@@ -36,7 +36,7 @@
         <option value=4>4</option>
         <option value=5>5</option>
       </select><br/><br/>
-      <input type="submit" value="Track Time" class="submit-button"/>
+      <input type="submit" value="Add Timer" class="submit-button"/>
     </form>
   </div>
   <script src="timers.js"></script>
